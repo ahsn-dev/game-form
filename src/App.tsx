@@ -1,19 +1,14 @@
-// import AddsOn from "./components/AddsOn";
+import FormProvider from "./context/FormContext";
 import Aside from "./components/Aside";
-// import FinishingUp from "./components/FinishingUp";
-// import ConfirmMessage from "./components/ConfirmMessage";
-import Plan from "./components/Plan";
-// import PersonalInfo from "./components/PersonalInfo";
+import Form from "./components/Form";
 
 export default function App() {
   return (
+    <FormProvider>
     <div className="flex">
     <Aside />
-    {/* <PersonalInfo /> */}
-    <Plan />
-    {/* <ConfirmMessage /> */}
-    {/* <AddsOn /> */}
-    {/* <FinishingUp /> */}
+    <Form />
     </div>
+    </FormProvider>
   )
 }
