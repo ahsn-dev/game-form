@@ -35,7 +35,19 @@ const Plan = () => {
           </div>
           <div className="flex justify-center items-center bg-sky-100 h-12 rounded">
             <span>Monthly</span>
-            <Switch sx={{}} />
+            <Switch sx={{
+              ".MuiSwitch-track": {
+                opacity: 100,
+                backgroundColor: "#02295A"
+              },
+              ".css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track" : {
+                backgroundColor: "#02295A",
+                opacity: 100,
+              },
+              ".MuiSwitch-thumb": {
+                backgroundColor: "white"
+              }
+            }} />
             <span>Yearly</span>
           </div>
           <div className="flex justify-between items-end">
