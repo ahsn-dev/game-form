@@ -1,8 +1,8 @@
 // import AddsOn from "./components/AddsOn";
 import Aside from "./components/Aside";
-import FinishingUp from "./components/FinishingUp";
+// import FinishingUp from "./components/FinishingUp";
 // import ConfirmMessage from "./components/ConfirmMessage";
-// import Plan from "./components/Plan";
+import Plan from "./components/Plan";
 // import PersonalInfo from "./components/PersonalInfo";
 
 export default function App() {
@@ -10,10 +10,10 @@ export default function App() {
     <div className="flex">
     <Aside />
     {/* <PersonalInfo /> */}
-    {/* <Plan /> */}
+    <Plan />
     {/* <ConfirmMessage /> */}
     {/* <AddsOn /> */}
-    <FinishingUp />
+    {/* <FinishingUp /> */}
     </div>
   )
 }

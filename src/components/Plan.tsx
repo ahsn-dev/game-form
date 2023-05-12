@@ -1,3 +1,4 @@
+import { Switch } from "@mui/material"
 const Plan = () => {
     return (
       <div className='pt-8 pl-60 gap-y-8 flex flex-col'>
@@ -34,7 +35,7 @@ const Plan = () => {
           </div>
           <div className="flex justify-center items-center bg-sky-100 h-12 rounded">
             <span>Monthly</span>
-            <button></button>
+            <Switch sx={{}} />
             <span>Yearly</span>
           </div>
           <div className="flex justify-between items-end">
