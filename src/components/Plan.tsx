@@ -6,12 +6,14 @@ import { useFormContext } from "../context/FormContext";
 const Plan = () => {
   const [activePlan, setActivePlan] = useState('')
   const [dateActivePlan, setDateActivePlan] = useState(true)
+  const [priceActivePlan, setPriceActivePlan] = useState("")
 
   const {pageCounter, setPageCounter, state, dispatch} = useFormContext()
 
 
   const activePlanFunction = (e:any) => {
-    setActivePlan(e.currentTarget.dataset.active)    
+    setActivePlan(e.currentTarget.dataset.active)
+    setPriceActivePlan(e.currentTarget.dataset.price)  
   }
 
   const handleSubmit = () => {
@@ -20,20 +22,24 @@ const Plan = () => {
       payload: {
         plan: {
           dateType: !dateActivePlan ? "monthly" : "yearly",
-          planType: activePlan
+          planType: activePlan,
+          price: priceActivePlan
       }
       }
     })
-    console.log(state);
     setPageCounter(3)
   }
+
+  const goBackHandler = () => {
+    setPageCounter(1)    
+}
     return (
       <div className='pt-8 pl-60 gap-y-8 flex flex-col'>
           <h1 className='text-2xl font-semibold'>Select Your Plan</h1>
           <p>You have the option of monthly or yearly biling.</p>
           {!dateActivePlan ?
           <div className="flex gap-x-6">
-              <div data-active="Arcade" onClick={activePlanFunction} className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Arcade"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div data-active="Arcade" data-price="9" onClick={activePlanFunction} className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Arcade"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                     <img className="w-10 h-10" src="../../public/images/game1.png" alt="game photo" />
                 </div>
@@ -42,7 +48,7 @@ const Plan = () => {
                     <span className="text-xs text-gray-500">9$/mo</span>
                 </div>
               </div>
-              <div onClick={activePlanFunction} data-active="Advanced" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Advanced"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div onClick={activePlanFunction} data-active="Advanced" data-price="12" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Advanced"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                 <img className="w-10 h-10" src="../../public/images/game2.png" alt="game photo" />
                 </div>
@@ -51,7 +57,7 @@ const Plan = () => {
                     <span className="text-xs text-gray-500">12$/mo</span>
                 </div>
               </div>
-              <div onClick={activePlanFunction} data-active="Pro" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Pro"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div onClick={activePlanFunction} data-active="Pro" data-price="15" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Pro"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                 <img className="w-10 h-10" src="../../public/images/game3.png" alt="game photo" />
                 </div>
@@ -62,7 +68,7 @@ const Plan = () => {
               </div>
           </div> :
           <div className="flex gap-x-6">
-              <div data-active="Arcade" onClick={activePlanFunction} className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Arcade"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div data-active="Arcade" data-price="90" onClick={activePlanFunction} className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Arcade"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                     <img className="w-10 h-10" src="../../public/images/game1.png" alt="game photo" />
                 </div>
@@ -72,7 +78,7 @@ const Plan = () => {
                     <div className="text-xs text-black">2 months free</div>
                 </div>
               </div>
-              <div onClick={activePlanFunction} data-active="Advanced" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Advanced"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div onClick={activePlanFunction} data-active="Advanced" data-price="120" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Advanced"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                 <img className="w-10 h-10" src="../../public/images/game2.png" alt="game photo" />
                 </div>
@@ -82,7 +88,7 @@ const Plan = () => {
                     <div className="text-xs text-black">2 months free</div>
                 </div>
               </div>
-              <div onClick={activePlanFunction} data-active="Pro" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Pro"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
+              <div onClick={activePlanFunction} data-active="Pro" data-price="150" className={`w-36 h-48 cursor-pointer rounded-md border ${activePlan === "Pro"? "bg-sky-100 border-gray-400" : "border-solid border-gray-200"} flex flex-col p-4 gap-y-12`}>
                 <div>
                 <img className="w-10 h-10" src="../../public/images/game3.png" alt="game photo" />
                 </div>
@@ -114,7 +120,7 @@ const Plan = () => {
             <span>Yearly</span>
           </div>
           <div className="flex justify-between items-end">
-            <button className="text-sm text-gray-400 pb-3">Go back</button>
+            <button onClick={goBackHandler} className="text-sm text-gray-400 pb-3">Go back</button>
             <button onClick={handleSubmit} className='flex self-end px-4 py-3 mt-16 text-sm rounded text-white bg-[#02295A]'>Next Step</button>
           </div>
       </div>

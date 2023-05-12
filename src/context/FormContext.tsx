@@ -20,10 +20,28 @@ export const useFormContext = () => {
 }
 
 const initState = {
-    personalInfo:  {
-        name: "",
-        email: "",
-        phone: 0
+    "name": "",
+    "email": "",
+    "phone": "",
+    "id": "",
+    "plan": {
+        "dateType": "monthly",
+        "planType": "",
+        "price": ""
+    },
+    "addons": {
+        "Online service": {
+            "active": false,
+            "price": ""
+        },
+        "Large storage": {
+            "active": false,
+            "price": ""
+        },
+        "Customizable profile": {
+            "active": false,
+            "price": ""
+        }
     }
 }
 

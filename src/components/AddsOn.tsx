@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useFormContext } from "../context/FormContext"
 
 const AddsOn = () => {
-    const [activeAddOns, setActiveAddOns] = useState({addonsType: "", price: ""})
+    const [activeAddOns, setActiveAddOns] = useState({"Online service": {active: false, price: ""}, "Large storage": {active:false, price: ""}, "Customizable profile": {active: false, price:""}})
   
     const {pageCounter, setPageCounter, state, dispatch} = useFormContext()
 
@@ -10,21 +10,40 @@ const AddsOn = () => {
         dispatch({
             type: 'ADD_TO_STATE',
             payload: {
-              addons: {
-                addonsType: activeAddOns.addonsType,
-                price: activeAddOns.price
-            }
+              addons: activeAddOns
             }
           })
-        //   console.log(state);
+          console.log(state);
           setPageCounter(4)
     }
 
     const addonsHandler = (e:any) => {
-        setActiveAddOns({
-        addonsType: e.currentTarget.dataset.name,
-        price: e.currentTarget.dataset.price
-        })
+        if(e.currentTarget.checked) {
+            console.log("checked");
+            
+            setActiveAddOns({
+                ...activeAddOns,
+                [e.currentTarget.dataset.name]: {
+                    active: true,
+                    price: e.currentTarget.dataset.price
+                }
+            })
+        } else {
+            console.log("unchecked");
+            
+            setActiveAddOns({
+                ...activeAddOns,
+                [e.currentTarget.dataset.name]: {
+                    active: false,
+                    price: ""
+                }
+            })
+        }
+        
+    }
+
+    const goBackHandler = () => {
+        setPageCounter(2)
     }
   return (
     <div className="pt-8 pl-60 gap-y-8 flex flex-col w-[75%]">
@@ -33,11 +52,11 @@ const AddsOn = () => {
         <div onClick={(e) => {
             console.log(e.target)
         }} className="flex flex-col gap-y-4">
-            <label onClick={addonsHandler} data-name="onlineServie" data-price="10" htmlFor="onlineService">
+            <label htmlFor="onlineService">
                 <div className="border border-solid border-gray-200 h-20 rounded-lg flex justify-between items-center p-8 w-[66%] cursor-pointer hover:border-blue-600">
                     <div className="flex justify-center items-center gap-x-4">
                         <div>
-                            <input type="radio" name="onlineService" id="onlineService" />
+                            <input onClick={addonsHandler} data-name="Online service" data-price="10" type="checkbox" name="onlineService" id="onlineService" />
                         </div>
                         <div>
                             <h2 className="font-bold">Online service</h2>
@@ -49,11 +68,11 @@ const AddsOn = () => {
                     </div>
                 </div>
             </label>
-            <label onClick={addonsHandler} data-name="largeStorage" data-price="20" htmlFor="largeStorage">
+            <label htmlFor="largeStorage">
                 <div className="border border-solid border-gray-200 h-20 rounded-lg flex justify-between items-center p-8 w-[66%] cursor-pointer hover:border-blue-600">
                     <div className="flex justify-center items-center gap-x-4">
                         <div>
-                            <input type="radio" name="onlineService" id="largeStorage" />
+                            <input data-name="Large storage" data-price="20" onClick={addonsHandler} type="checkbox" name="largeStorage" id="largeStorage" />
                         </div>
                         <div>
                             <h2 className="font-bold">Large storage</h2>
@@ -65,11 +84,11 @@ const AddsOn = () => {
                     </div>
                 </div>
             </label>
-            <label onClick={addonsHandler} data-name="customizeProfile" data-price="20" htmlFor="customizeProfile">
+            <label htmlFor="customizeProfile">
                 <div className="border border-solid border-gray-200 h-20 rounded-lg flex justify-between items-center p-8 w-[66%] cursor-pointer hover:border-blue-600">
                     <div className="flex justify-center items-center gap-x-4">
                         <div>
-                            <input type="radio" name="onlineService" id="customizeProfile" />
+                            <input data-name="Customizable profile" data-price="20" onClick={addonsHandler} type="checkbox" name="customizeProfile" id="customizeProfile" />
                         </div>
                         <div>
                             <h2 className="font-bold">Customizable profile</h2>
@@ -83,7 +102,7 @@ const AddsOn = () => {
             </label>
         </div>
           <div className="flex justify-between items-end w-[66%] mt-16">
-            <button className="text-sm text-gray-400 pb-3">Go back</button>
+            <button onClick={goBackHandler} className="text-sm text-gray-400 pb-3">Go back</button>
             <button onClick={handleSubmit} className='flex self-end px-4 py-3 text-sm rounded text-white bg-[#02295A]'>Next Step</button>
           </div>
     </div>
